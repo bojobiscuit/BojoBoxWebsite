@@ -6,13 +6,16 @@
     }">
     <table class="table table-hover rayTable text-center">
       <thead>
-        <tr>
-          <th *ngIf="viewName" class="fixedColumn text-left">Name</th>
-          <th *ngIf="viewRank">Rank</th>
-          <th *ngIf="viewSeason" [class.fixedColumnSeason]="isPlayer">Season</th>
-          <th *ngIf="viewTeam">Team</th>
-          <th *ngIf="viewYears">Years</th>
-          <th *ngIf="canViewTeamCount()">Teams</th>
+        <tr class="hands">
+          <th *ngIf="viewName" class="fixedColumn text-left noHands">Name</th>
+          <th *ngIf="viewRank" class="noHands">Rank</th>
+          <ng-container *ngIf="viewSeason">
+            <th *ngIf="isPlayer" class="fixedColumnSeason" (click)="sortBy(null)">Season</th>
+            <th *ngIf="!isPlayer" class="noHands">Season</th>
+          </ng-container>
+          <th *ngIf="viewTeam" class="noHands">Team</th>
+          <th *ngIf="viewYears" class="noHands">Years</th>
+          <th *ngIf="canViewTeamCount()" class="noHands">Teams</th>
           <ng-container *ngIf="viewSkater">
             <th *ngFor="let header of skaterHeaders;let i = index" [class.selectedColumn]="checkIndex(i)" (click)="sortBy(i)">{{header}}
             </th>
@@ -28,9 +31,12 @@
           <td *ngIf="viewName" class="fixedColumn text-left"><a
               [routerLink]="['/' + playerType, row.player.id]">{{row.player.name}}</a></td>
           <td *ngIf="viewRank">{{row.rank}}</td>
-          <td *ngIf="viewSeason" [class.fixedColumnSeason]="isPlayer">{{row.season}}</td>
-          <td *ngIf="viewTeam"><img src="assets/img/{{row.team.acronym}}.png" *ngIf="row.team" /><span
-              *ngIf="!row.team">Split</span></td>
+          <ng-container *ngIf="viewSeason">
+            <td *ngIf="isPlayer" class="fixedColumnSeason">{{row.season}}</td>
+            <td *ngIf="!isPlayer">{{row.season}}</td>
+          </ng-container>
+          <td *ngIf="viewTeam"><img [src]="getTeamIcon(row.team)"
+             /></td>
           <td *ngIf="viewYears">{{row.seasonCount}}</td>
           <td *ngIf="canViewTeamCount()">{{row.teamCount}}</td>
           <td *ngFor="let stat of row.stats;let i = index" [class.selectedColumn]="checkIndex(i)">{{stat}}</td>

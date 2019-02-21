@@ -83,3 +83,10 @@ tfoot th.fixedColumnSeason {
 .selectedColumn {
     background: $secondary;
 }
+
+.hands th {
+    cursor: pointer;
+}
+.noHands {
+    cursor: default !important;
+}

@@ -5,7 +5,6 @@ export class StatParameters {
     era: number;
     season: number;
     league: number;
-    playerType: number;
     seasonType: number;
     selectedColumnIndex: number;
 
@@ -15,11 +14,8 @@ export class StatParameters {
         this.season = +params.get('season');
         this.league = +params.get('league');
         this.seasonType = +params.get('seasonType');
-
         var col = params.get('selectedColumnIndex');
-        if (!col)
-            this.selectedColumnIndex = isSkater ? 3 : 1;
-        else
+        if (col)
             this.selectedColumnIndex = +col;
     }
 
@@ -31,10 +27,10 @@ export class StatParameters {
         this.pushArgument(queryList, "season", this.season);
         this.pushArgument(queryList, "league", this.league, 1);
         this.pushArgument(queryList, "seasonType", this.seasonType, 1);
-        this.pushArgument(queryList, "selectedColumnIndex", this.selectedColumnIndex, -1);
 
-
-        console.log(queryList);
+        if (this.selectedColumnIndex || this.selectedColumnIndex == 0) {
+            this.pushArgument(queryList, "selectedColumnIndex", this.selectedColumnIndex, -1);
+        }
 
         return (queryList.length > 0) ?
             "?" + queryList.join("&") : "";
