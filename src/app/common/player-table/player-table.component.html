@@ -52,5 +52,5 @@
       </tfoot>
     </table>
   </div>
-  <pagination [pages]="pages" class="float-right mt-2"></pagination>
+  <pagination (clickNumber)="clickedPage($event)" [currentPage]="statTable.statParameters.page" [pageCount]="statTable.pageCount" class="float-right mt-2"></pagination>
 </div>

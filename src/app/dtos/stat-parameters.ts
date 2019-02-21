@@ -6,7 +6,8 @@ export class StatParameters {
     season: number;
     league: number;
     seasonType: number;
-    selectedColumnIndex: number;
+    col: number;
+    page: number;
 
     setParams(params: ParamMap, isSkater: boolean) {
         this.team = +params.get('team');
@@ -14,9 +15,10 @@ export class StatParameters {
         this.season = +params.get('season');
         this.league = +params.get('league');
         this.seasonType = +params.get('seasonType');
-        var col = params.get('selectedColumnIndex');
+        this.page = +params.get('page');
+        var col = params.get('col');
         if (col)
-            this.selectedColumnIndex = +col;
+            this.col = +col;
     }
 
     getQuery(): string {
@@ -27,9 +29,10 @@ export class StatParameters {
         this.pushArgument(queryList, "season", this.season);
         this.pushArgument(queryList, "league", this.league, 1);
         this.pushArgument(queryList, "seasonType", this.seasonType, 1);
+        this.pushArgument(queryList, "page", this.page);
 
-        if (this.selectedColumnIndex || this.selectedColumnIndex == 0) {
-            this.pushArgument(queryList, "selectedColumnIndex", this.selectedColumnIndex, -1);
+        if (this.col || this.col == 0) {
+            this.pushArgument(queryList, "col", this.col, -1);
         }
 
         return (queryList.length > 0) ?

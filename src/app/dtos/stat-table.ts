@@ -7,6 +7,7 @@ export class StatTable {
     displayType: string;
     playerType: string;
     headerText: string;
+    pageCount: number;
 
     seasons: number[];
     teams: BasicData[];

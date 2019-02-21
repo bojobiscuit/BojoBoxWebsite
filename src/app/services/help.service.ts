@@ -15,7 +15,8 @@ export class HelpService {
     switch (name) {
       case "team": linkParams.team = arg; break;
       case "seasonType": linkParams.seasonType = arg; break;
-      case "selectedColumnIndex": linkParams.selectedColumnIndex = arg; break;
+      case "col": linkParams.col = arg; break;
+      case "page": linkParams.page = arg; break;
       case "league": {
         linkParams.league = arg;
         linkParams.team = 0; 
@@ -39,13 +40,12 @@ export class HelpService {
     if (linkParams.era > 0) queryParmsNew['era'] = linkParams.era;
     if (linkParams.league > 1) queryParmsNew['league'] = linkParams.league;
     if (linkParams.seasonType > 1) queryParmsNew['seasonType'] = linkParams.seasonType;
-    if (linkParams.selectedColumnIndex >= 0) queryParmsNew['selectedColumnIndex'] = linkParams.selectedColumnIndex;
+    if (linkParams.page > 0) queryParmsNew['page'] = linkParams.page;
+    if (linkParams.col >= 0) queryParmsNew['col'] = linkParams.col;
 
     let navigationExtras: NavigationExtras = {
       queryParams: queryParmsNew
     };
-    
-    console.log(navigationExtras);
 
     var routeDirection = this.router.url;
     if (routeDirection.indexOf("?") > 0)

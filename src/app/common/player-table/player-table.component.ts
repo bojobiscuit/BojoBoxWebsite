@@ -18,7 +18,7 @@ export class PlayerTableComponent implements OnInit {
   @Input() rows: PlayerTableRow[];
   @Input() totals: number[];
   @Input() isTeam: boolean;
-  @Input() selectedColumnIndex: number = -1;
+  @Input() col: number = -1;
   @Input() statTable: StatTable;
 
   viewName: boolean = false;
@@ -33,8 +33,6 @@ export class PlayerTableComponent implements OnInit {
   isPlayer: boolean = false;
   isCareer: boolean = false;
   isSeason: boolean = false;
-
-  pages: number = 5;
 
   skaterHeaders = ["GP", "G", "A", "P", "+/-", "PIM", "PM5", "HIT", "HTT", "SHT", "OSB", "OSM", "SB", "MP", "PPG", "PPA", "PPP", "PPS", "PPM", "PKG", "PKA", "PKP", "PKS", "PKM", "GW", "GT", "FOW", "FOT", "EG", "HT", "PSG", "PSS", "FW", "FL", "FT"];
   goalieHeaders = ['GP', 'W', 'L', 'OTL', 'MP', 'PIM', 'SO', 'GA', 'SA', 'A', 'EG', 'PSS', 'PSA', 'ST', 'BG'];
@@ -70,7 +68,6 @@ export class PlayerTableComponent implements OnInit {
         this.viewSeason = true;
         this.viewTotals = true;
         this.isPlayer = true;
-        this.pages = 1;
         break;
       }
     }
@@ -100,17 +97,18 @@ export class PlayerTableComponent implements OnInit {
   }
 
   checkIndex(i: number) {
-    return i == this.selectedColumnIndex;
+    return i == this.col;
   }
 
   checkIndexTotal(i: number) {
-    if (!this.selectedColumnIndex && this.selectedColumnIndex != 0)
+    if (!this.col && this.col != 0)
       return false;
-    return i == this.selectedColumnIndex + 2;
+    return i == this.col + 2;
   }
 
   sortBy(i: number) {
-    this.help.getLink(this.statTable.statParameters, "selectedColumnIndex", i);
+    this.rows = null;
+    this.help.getLink(this.statTable.statParameters, "col", i);
   }
 
   getTeamIcon(team: BasicData) {
@@ -123,6 +121,10 @@ export class PlayerTableComponent implements OnInit {
       case 3: return "assets/img/iihf/" + team.acronym + ".png";
       default: return "error";
     }
+  }
+
+  clickedPage(page) {
+    this.help.getLink(this.statTable.statParameters, "page", page);
   }
 
 }
