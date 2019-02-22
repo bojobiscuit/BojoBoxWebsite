@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 img {
     max-width: 500px;
 }
@@ -6,4 +8,8 @@ img {
     img {
         width: 100%;
     }
+}
+
+.list-group-item-action {
+    border-color: rgb(125, 138, 151);
 }

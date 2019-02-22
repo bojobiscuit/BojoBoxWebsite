@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'career/goalie', component: CareerGoalieStatsComponent },
   { path: 'skater/:id', component: SkaterStatsComponent },
   { path: 'goalie/:id', component: GoalieStatsComponent },
+  { path: 'search/:searchInput', component: HomeComponent },
 ];
 
 @NgModule({
