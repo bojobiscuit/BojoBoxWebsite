@@ -1,5 +1,5 @@
 {
-    "appService.deploySubpath": "dist\\website",
+    "appService.deploySubpath": "dist/website",
     "appService.zipIgnorePattern": [
         "node_modules{,/**}"
     ],
