@@ -18,6 +18,8 @@
     text-align: left;
     background-color: $secondary;
     border-bottom: 5px solid $primary;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .fixedColumnSeason {
@@ -28,13 +30,13 @@
 
 @media (max-width: 575px) {
     .fixedMargin {
-        margin-left: 110px
+        margin-left: 150px
     }
     .fixedMarginSeason {
         margin-left: 70px;
     }
     .fixedColumn {
-        width: 110px;
+        width: 150px;
     }
     .fixedColumnSeason {
         width: 70px;

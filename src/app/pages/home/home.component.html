@@ -11,10 +11,10 @@
   </div>
 </div>
 <div class="row justify-content-center">
-  <div class="text-center" *ngIf="!searchResults">
-    <a href="#" (click)="getNewImage()"><img [src]="imgPath" /></a>
+  <div class="text-center" *ngIf="!hideImage">
+    <a href="#" (click)="getNewImage()"><img [attr.src]="imgPath" *ngIf="!hideImage" /></a>
   </div>
-  <div class="col col-sm-10 col-md-8 col-lg-6 text-center" *ngIf="searchResults">
+  <div class="col col-sm-10 col-md-8 col-lg-6 text-center" *ngIf="hideImage">
     <a (click)="clearResults()" class="btn btn-sm mb-3" role="button">Clear Results</a>
     <div class="list-group">
       <a *ngFor="let result of searchResults.results" class="list-group-item list-group-item-action"

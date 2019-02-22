@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   imgPath: string;
   searchResults: SearchResults;
   searchInput: string;
+  hideImage: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) { }
 
@@ -21,12 +22,14 @@ export class HomeComponent implements OnInit {
   }
 
   private GetParams() {
+    this.hideImage = false;
     this.route.paramMap.subscribe((params) => {
+      var input = null;
       if (params.has('searchInput'))
-        this.searchInput = params.get('searchInput');
+        input = params.get('searchInput');
 
-      if (this.searchInput)
-        this.search(this.searchInput);
+      if (input)
+        this.search(input);
       else {
         this.clearResults();
         this.getNewImage();
@@ -55,10 +58,12 @@ export class HomeComponent implements OnInit {
     this.searchInput = "";
   }
 
-  search(searchInput: string) {
-    if (searchInput.length > 2) {
-      this.apiService.getSearchResults(searchInput).subscribe((results) => {
+  search(input: string) {
+    if (input.length > 2) {
+      this.apiService.getSearchResults(input).subscribe((results) => {
         this.searchResults = results;
+        this.searchInput = results.searchInput;
+        this.hideImage = true;
       });
     }
   }
