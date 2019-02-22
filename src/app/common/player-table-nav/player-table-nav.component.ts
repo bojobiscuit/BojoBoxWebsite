@@ -65,7 +65,7 @@ export class PlayerTableNavComponent implements OnInit {
     switch (this.statParams.league) {
       case 1: return "SHL";
       case 2: return "SMJHL";
-      case 3: return "IIHL";
+      case 3: return "IIHF";
     }
     return "error";
   }
