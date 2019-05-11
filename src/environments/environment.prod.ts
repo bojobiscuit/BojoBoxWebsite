@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  connectionString: 'https://bojoboxapi.azurewebsites.net/api'
+  connectionString: 'http://209.182.219.138:8000/api'
 };

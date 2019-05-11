@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+
+  bojobox_website:
+    container_name: bojobox_website
+    image: ${DOCKER_REGISTRY}bojoboxweb
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'
