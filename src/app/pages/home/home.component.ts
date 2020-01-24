@@ -60,11 +60,19 @@ export class HomeComponent implements OnInit {
 
   search(input: string) {
     if (input.length > 2) {
-      this.apiService.getSearchResults(input).subscribe((results) => {
-        this.searchResults = results;
-        this.searchInput = results.searchInput;
-        this.hideImage = true;
-      });
+      this.apiService.getSearchResults(input).subscribe(
+        (results) => {
+          this.searchResults = results;
+          this.searchInput = results.searchInput;
+          this.hideImage = true;
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          console.log('hi');
+        }
+      );
     }
   }
 
